@@ -46,8 +46,8 @@ module.exports = {
         return sum;
     },
 
-    play: function (frames) {
-        frames = frames || new Array(MAX_FRAME_COUNT).fill(this.generateFrame());
+    play: function () {
+        let frames = new Array(MAX_FRAME_COUNT).fill(this.generateFrame());
         frames = this.countFrameScores(frames);
         return this.countAccumulatedScore(frames);
     }

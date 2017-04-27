@@ -14,6 +14,18 @@ const mock = [
     [10],   // 100
     [3, 6]  // 118
 ];
+const mockScores = [
+    [2, 8], // 10
+    [6, 3], // 19
+    [1, 0], // 20
+    [10],   // 30
+    [8, 12], // 50
+    [8, 3], // 61
+    [1, 8], // 70
+    [7, 3], // 80
+    [20],   // 100
+    [6, 12]  // 118
+];
 
 describe('frame', () => {
     describe('.play()',  () => {
@@ -24,9 +36,14 @@ describe('frame', () => {
             return expect(frame.play() > 0).to.be.true
         });
     });
-    describe('.play(mock)',  () => {
+    describe('.countFrameScores(mock)',  () => {
         it('should return 118', () => {
-            expect(frame.play(mock)).to.equal(118)
+            expect(JSON.stringify(frame.countFrameScores(mock))).to.equal(JSON.stringify(mockScores))
+        });
+    });
+    describe('.countAccumulatedScore(mockScores)',  () => {
+        it('should return 118', () => {
+            expect(frame.countAccumulatedScore(mockScores)).to.equal(118)
         });
     });
     describe('.isSpare([2, 8])',  () => {
