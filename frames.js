@@ -39,15 +39,15 @@ module.exports = {
     },
 
     countAccumulatedScore: function(frameScores) {
-        let sum = 0;
-        frameScores.forEach(value => {
-            sum += value.reduce((prev, next) => prev + next);
-        });
-        return sum;
+        return [].concat.apply([], frameScores).reduce((prev, next) => prev + next);
+        // return frameScores.reduce((acc, frame) => {
+        //     return frame.reduce((prev, next) => prev + next, acc);
+        // }, 0);
     },
 
     play: function () {
-        let frames = new Array(MAX_FRAME_COUNT).fill(this.generateFrame());
+        let frames = new Array(MAX_FRAME_COUNT).fill([]);
+        frames = frames.map(value => this.generateFrame());
         frames = this.countFrameScores(frames);
         return this.countAccumulatedScore(frames);
     }
