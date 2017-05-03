@@ -4,7 +4,6 @@ const MAX_FRAME_COUNT = 10;
 const MAX_PIN = 10;
 
 module.exports = {
-    //nem pontszamot ad vissza, hanem a ledontott babuk szamat
     generateFrame: function() {
         let firstRoll = utils.getRandomIntInclusive(0, MAX_PIN);
         if(firstRoll === MAX_PIN) {
@@ -26,9 +25,7 @@ module.exports = {
         frames.reduce((prev, curr) => {
             let tmp = curr;
             if(this.isStrike(prev)) {
-                tmp = curr.map(val => {
-                    return val * 2;
-                });
+                tmp = curr.map(val => val * 2);
             } else if(this.isSpare(prev)) {
                 tmp = curr.length > 1 ? [curr[0] * 2, curr[1]] : [curr[0] * 2];
             }
@@ -39,10 +36,7 @@ module.exports = {
     },
 
     countAccumulatedScore: function(frameScores) {
-        return [].concat.apply([], frameScores).reduce((prev, next) => prev + next);
-        // return frameScores.reduce((acc, frame) => {
-        //     return frame.reduce((prev, next) => prev + next, acc);
-        // }, 0);
+        return [].concat(...frameScores).reduce((prev, next) => prev + next);
     },
 
     play: function () {
